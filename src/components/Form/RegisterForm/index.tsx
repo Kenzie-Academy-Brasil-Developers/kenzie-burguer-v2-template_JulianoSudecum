@@ -6,6 +6,7 @@ import { StyledForm } from '../../../styles/form';
 import { UserContext } from '../../../providers/UserContext';
 import { registerFormSchema, TRegisterValues } from './RegisterFormSchema';
 import { zodResolver } from "@hookform/resolvers/zod"
+import { iLoginData } from '../LoginForm';
 
 
 export interface iRegisterData{
@@ -17,13 +18,12 @@ export interface iRegisterData{
 
 const RegisterForm = () => {
 
-  const { register, handleSubmit, formState: {errors}} = useForm<TRegisterValues>({
+  const { register, handleSubmit, formState: {errors}} = useForm<iRegisterData | iLoginData>({
     resolver: zodResolver(registerFormSchema)
   })
   const { registerRequest } = useContext(UserContext)
 
-  const submit: SubmitHandler<iRegisterData> =  (formData) => {
-    console.log(formData)
+  const submit: SubmitHandler<iRegisterData | iLoginData> =  (formData) => {
     registerRequest(formData)
   }
   return(

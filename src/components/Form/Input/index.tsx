@@ -5,12 +5,12 @@ import { iLoginData } from '../LoginForm';
 import { iRegisterData } from '../RegisterForm';
 
 interface iInputProps{
-  error: string
+  error?: string
   placeholder:string
   id: string
   register: UseFormRegister<iLoginData | iRegisterData>
   type: string
-  name: "email" | "password" | "name" 
+  name: "email" | "password" | "name" | "confirm"
 }
 
 const Input = ({error, placeholder, id, register, type , name }: iInputProps) => (

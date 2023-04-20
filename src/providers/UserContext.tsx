@@ -1,12 +1,13 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { iLoginData } from "../components/Form/LoginForm";
 import { api } from "../services/api";
 
 export const UserContext = createContext({} as iUserContext)
 
 interface iUserContext{
-  registerRequest: (formData: iUserRegister) => Promise<void>
+  registerRequest: (formData: iUserRegister | iLoginData) => Promise<void>
   loginRequest: (formData: iUserLogin) => Promise<void>
 }
 
@@ -25,6 +26,7 @@ interface iUserRegister{
   name: string
   email: string
   password: string
+  confirm?: string
 }
 
 interface iUserLogin{
@@ -42,7 +44,7 @@ export const UserProvider = ({children}: iProviderProps) => {
   const [ user , setUser ] = useState<iUser | null>(null)
   const navigate = useNavigate()
 
-  const registerRequest = async(formData: iUserRegister) =>{
+  const registerRequest = async(formData: iUserRegister | iLoginData) =>{
     try {
       const { data } = await api.post<iUser>("/users", formData)
       navigate("/")

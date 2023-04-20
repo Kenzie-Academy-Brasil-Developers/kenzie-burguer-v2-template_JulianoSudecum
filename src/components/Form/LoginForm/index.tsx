@@ -11,6 +11,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 export interface iLoginData{
   email: string
   password: string
+  name?: string
+  confirm?: string
 }
 
 const LoginForm = () => {
