@@ -50,6 +50,7 @@ export const UserProvider = ({children}: iProviderProps) => {
       navigate("/")
       toast.success("Usuario registrado com sucesso", {autoClose:2500})
     } catch (error) {   
+      toast.error("Ocorreu erro ao fazer cadastro", {autoClose:2500})
       console.log(error)
     }
   }
@@ -62,6 +63,7 @@ export const UserProvider = ({children}: iProviderProps) => {
       navigate("/shop")
       toast.success("Login efetuado com sucesso", {autoClose:2500})
     } catch (error) {
+      toast.error("Ocorreu erro ao fazer login", {autoClose:2500})
       console.log(error)
     }
   }
