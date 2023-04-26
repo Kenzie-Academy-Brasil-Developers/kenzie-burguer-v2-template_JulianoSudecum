@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { ChangeEvent, createContext, useContext, useState } from "react";
 import { api } from "../services/api";
 import { iProduct } from "./CartContext";
 
@@ -16,6 +16,7 @@ interface iProductsCont{
   products: iProduct[]
   setProducts: React.Dispatch<React.SetStateAction<iProduct[]>>
   getProducts: () => Promise<void>
+  searchProducts: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 export const ProductsProvider = ({children}: iProductsProps) =>{
@@ -23,7 +24,10 @@ export const ProductsProvider = ({children}: iProductsProps) =>{
   const [ filterName , setFilterName ] = useState<iProduct[]>([])
   const [ filterCategory , setFilterCategory ] = useState<iProduct[]>([])
   const [ products, setProducts ] = useState<iProduct[]>([])
+  const [ valueInput , setValueInput ] = useState("")
 
+  const productsFilterName = products.filter(item => item.name.toLowerCase().includes(valueInput.toLowerCase()))
+  const productsFilterCategory = products.filter(item => item.category.toLowerCase().includes(valueInput.toLowerCase()))
 
   const getProducts = async () =>{
     const token = localStorage.getItem("@hamburguer-token")
@@ -38,9 +42,20 @@ export const ProductsProvider = ({children}: iProductsProps) =>{
       console.log(error)
     }
   }
+
+  const searchProducts = (e: ChangeEvent<HTMLInputElement>) => {
+    setValueInput(e.target.value)
+    setFilterName(productsFilterName)
+    setFilterCategory(productsFilterCategory)
+
+    if(e.target.value == ""){
+      setFilterCategory([])
+      setFilterName([])
+    }
+  }
   
   return(
-    <ProductsContext.Provider value={{products, setProducts, getProducts, filterName, setFilterName, filterCategory, setFilterCategory}}>
+    <ProductsContext.Provider value={{searchProducts, products, setProducts, getProducts, filterName, setFilterName, filterCategory, setFilterCategory}}>
       {children}
     </ProductsContext.Provider>
   )
