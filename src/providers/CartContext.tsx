@@ -27,39 +27,25 @@ export interface iProduct{
 
 
 interface iProductContext{
-  products: iProduct[]
-  setProducts: React.Dispatch<React.SetStateAction<iProduct[]>>
-  getProducts: () => Promise<void>
   setCartList: React.Dispatch<React.SetStateAction<iProduct[]>>
   cartList: iProduct[]
   totalValue: number
   setTotalValue: React.Dispatch<React.SetStateAction<number>>
+  setModal: React.Dispatch<React.SetStateAction<boolean>>
+  modal: boolean
 }
 
 export const CartProvider = ({children}: iProviderPros) => {
 
-  const [ products, setProducts ] = useState<iProduct[]>([])
   const [ cartList, setCartList ] = useState<iProduct[]>([])
   const [ totalValue, setTotalValue ] = useState<number>(0)
+  const [ modal, setModal ] = useState(false)
 
-    const getProducts = async () =>{
-      const token = localStorage.getItem("@hamburguer-token")
-      try {
-        const {data} = await api.get("/products", {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
-        setProducts(data)
-      } catch (error) {
-        console.log(error)
-      }
-    }
     
 
 
   return(
-    <CartContext.Provider value={{products, setProducts, getProducts, cartList, setCartList, totalValue, setTotalValue}}>
+    <CartContext.Provider value={{modal, setModal, cartList, setCartList, totalValue, setTotalValue}}>
       {children}
     </CartContext.Provider>
   )

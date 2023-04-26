@@ -7,10 +7,11 @@ import { StyledContainer } from '../../styles/grid';
 import { useContext, useEffect } from 'react';
 import { CartContext } from '../../providers/CartContext';
 import { useNavigate } from 'react-router-dom';
+import { ProductsContext } from '../../providers/ProductsContext';
 
 const ShopPage = () => {
 
-  const { getProducts } = useContext(CartContext)
+  const { getProducts } = useContext(ProductsContext)
   const navigate = useNavigate()
 
   useEffect(()=>{

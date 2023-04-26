@@ -5,9 +5,23 @@ import IllustrationBox from '../../components/IllustrationBox';
 import { StyledButtonLink } from '../../styles/button';
 import { StyledContainer, StyledGridBox } from '../../styles/grid';
 import { StyledParagraph, StyledTitle } from '../../styles/typography';
+import { useContext, useEffect } from 'react';
+import { ProductsContext } from '../../providers/ProductsContext';
+import { useNavigate } from 'react-router-dom';
 
 
 const LoginPage = () => {
+
+  const { getProducts } = useContext(ProductsContext)
+  const navigate = useNavigate()
+
+  useEffect(()=>{
+    const token = localStorage.getItem("@hamburguer-token")
+    if(token){
+      navigate("/shop")
+      getProducts()
+    }
+  },[])
 
   return(
     <StyledLoginPage>

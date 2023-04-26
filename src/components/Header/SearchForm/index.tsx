@@ -2,12 +2,11 @@ import { MdSearch } from 'react-icons/md';
 import { StyledSearchForm } from './style';
 import { StyledButton } from '../../../styles/button';
 import { ChangeEvent, useContext, useState } from 'react';
-import { CartContext } from '../../../providers/CartContext';
 import { ProductsContext } from '../../../providers/ProductsContext';
 
 const SearchForm = () => {
 
-  const { products } = useContext(CartContext)
+  const { products } = useContext(ProductsContext)
   const { filterName, setFilterName } = useContext(ProductsContext)
   const { filterCategory, setFilterCategory } = useContext(ProductsContext)
 

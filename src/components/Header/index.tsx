@@ -6,13 +6,13 @@ import LogoKenzieBurguer from '../../assets/LogoKenzieBurguer.svg';
 
 import { StyledContainer } from '../../styles/grid';
 import { useContext } from 'react';
-import { ModalContext } from '../../providers/ModalContext';
+import { CartContext } from '../../providers/CartContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const Header = () => {
 
-  const { modal, setModal } = useContext(ModalContext)
+  const { modal, setModal } = useContext(CartContext)
   const navigate = useNavigate()
 
   const logoutFunction = () => {

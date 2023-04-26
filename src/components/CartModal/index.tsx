@@ -4,13 +4,13 @@ import CartProductList from './CartProductList';
 import { StyledCartModalBox } from './style';
 import { StyledParagraph, StyledTitle } from '../../styles/typography';
 import { useContext } from 'react';
-import { ModalContext } from '../../providers/ModalContext';
 import { CartContext } from '../../providers/CartContext';
+import { ProductsContext } from '../../providers/ProductsContext';
 
 const CartModal = () => {
 
-  const { modal, setModal } = useContext(ModalContext)
-  const { products } = useContext(CartContext)
+  const { modal, setModal } = useContext(CartContext)
+  const { products } = useContext(ProductsContext)
   const { cartList } = useContext(CartContext)
 
   return(

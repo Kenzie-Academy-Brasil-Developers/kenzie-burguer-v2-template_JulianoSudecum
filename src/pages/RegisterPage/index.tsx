@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { StyledRegisterPage } from './style';
 import RegisterForm from '../../components/Form/RegisterForm';
@@ -6,8 +6,21 @@ import IllustrationBox from '../../components/IllustrationBox';
 
 import { StyledContainer, StyledGridBox } from '../../styles/grid';
 import { StyledTitle } from '../../styles/typography';
+import { useContext, useEffect } from 'react';
+import { ProductsContext } from '../../providers/ProductsContext';
 
 const RegisterPage = () => {
+
+  const { getProducts } = useContext(ProductsContext)
+  const navigate = useNavigate()
+
+  useEffect(()=>{
+    const token = localStorage.getItem("@hamburguer-token")
+    if(token){
+      navigate("/shop")
+      getProducts()
+    }
+  },[])
 
   return(
     <StyledRegisterPage>

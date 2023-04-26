@@ -6,7 +6,7 @@ import { StyledProductList } from './style';
 
 const ProductList = () => {
 
-  const { products } = useContext(CartContext)
+  const { products } = useContext(ProductsContext)
   const { filterName, setFilterName } = useContext(ProductsContext)
   const { filterCategory, setFilterCategory } = useContext(ProductsContext)
 
